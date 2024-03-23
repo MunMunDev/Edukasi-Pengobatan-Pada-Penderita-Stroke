@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.user.galeri_herbal.main.GaleriHerbalMainActivity"
+    android:id="@+id/drawerLayoutMain">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <View
+            android:id="@+id/bgHeader"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/titleHeader"
+            android:background="@color/primaryColor"/>
+
+        <ImageView
+            android:id="@+id/ivDrawerView"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/baseline_dehaze_24"
+            android:elevation="10dp"/>
+
+        <TextView
+            android:id="@+id/titleHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivDrawerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="22dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="20dp"
+            android:text="Galeri Herbal"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvGaleriHerbal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/bgHeader"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            tools:listitem="@layout/list_galeri_herbal_main"
+            tools:itemCount="4"
+            android:visibility="gone"/>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/smGaleriHerbal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/bgHeader"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:visibility="visible">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/list_galeri_herbal_main_shimmer"/>
+                <include layout="@layout/list_galeri_herbal_main_shimmer"/>
+                <include layout="@layout/list_galeri_herbal_main_shimmer"/>
+                <include layout="@layout/list_galeri_herbal_main_shimmer"/>
+                <include layout="@layout/list_galeri_herbal_main_shimmer"/>
+                <include layout="@layout/list_galeri_herbal_main_shimmer"/>
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/btnObatHerbalTumbuhan"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/bgHeader"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            app:cardCornerRadius="8dp">-->
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/ivObatHerbalTumbuhan"-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    android:src="@drawable/gambar_obat_herbal_tumbuh_tumbuhan"/>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tvJudulObatHerbalTumbuhan"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/ivObatHerbalTumbuhan"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:layout_marginStart="14dp"-->
+<!--                    android:layout_marginEnd="14dp"-->
+<!--                    android:text="Obat Herbal Dari Tumbuh- Tumbuhanan"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textStyle="bold"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tvJudulObatHerbalTumbuhan"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/ivObatHerbalTumbuhan"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginStart="14dp"-->
+<!--                    android:layout_marginEnd="14dp"-->
+<!--                    android:text="Halaman Ini Berisi Informasi Tentang Obat Herbal Dari Tumbuh-Tumbuhan"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textStyle="normal"/>-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/btnObatHerbalBuahan"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/btnObatHerbalTumbuhan"-->
+<!--            android:layout_marginTop="14dp"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            app:cardCornerRadius="8dp">-->
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/ivObatHerbalBuahan"-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    android:src="@drawable/gambar_obat_herbal_buahan"/>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tvJudulObatHerbalBuahan"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/ivObatHerbalBuahan"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:layout_marginStart="14dp"-->
+<!--                    android:layout_marginEnd="14dp"-->
+<!--                    android:text="Obat Herbal Dari Buah-Buahan"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textStyle="bold"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tvJudulObatHerbalBuahan"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/ivObatHerbalBuahan"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginStart="14dp"-->
+<!--                    android:layout_marginEnd="14dp"-->
+<!--                    android:text="Halaman Ini Berisi Informasi Tentang Obat Herbal Dari Buah-Buahan"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textStyle="normal"/>-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/btnObatHerbalHewan"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/btnObatHerbalBuahan"-->
+<!--            android:layout_marginTop="14dp"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            app:cardCornerRadius="8dp">-->
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/ivObatHerbalHewan"-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    android:src="@drawable/gambar_obat_herbal_hewan1"/>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tvJudulObatHerbalHewan"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/ivObatHerbalHewan"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:layout_marginStart="14dp"-->
+<!--                    android:layout_marginEnd="14dp"-->
+<!--                    android:text="Obat Herbal Dari Hewan"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textStyle="bold"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tvJudulObatHerbalHewan"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/ivObatHerbalHewan"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginStart="14dp"-->
+<!--                    android:layout_marginEnd="14dp"-->
+<!--                    android:text="Halaman Ini Berisi Informasi Tentang Obat Herbal Dari Hewan"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textStyle="normal"/>-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/btnObatHerbalBunga"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/btnObatHerbalHewan"-->
+<!--            android:layout_marginTop="14dp"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            app:cardCornerRadius="8dp">-->
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/ivObatHerbalBunga"-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    android:src="@drawable/gambar_obat_herbal_bunga"/>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tvJudulObatHerbalBunga"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/ivObatHerbalBunga"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:layout_marginStart="14dp"-->
+<!--                    android:layout_marginEnd="14dp"-->
+<!--                    android:text="Obat Herbal Dari Bunga dan Daun-Daunan"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textStyle="bold"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tvJudulObatHerbalBunga"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/ivObatHerbalBunga"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginStart="14dp"-->
+<!--                    android:layout_marginEnd="14dp"-->
+<!--                    android:text="Halaman Ini Berisi Informasi Tentang Obat Herbal Dari Bunga dan Daun-Daunan"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textStyle="normal"/>-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu_user"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:background="@color/white"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

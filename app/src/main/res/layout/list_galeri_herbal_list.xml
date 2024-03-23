@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="12dp"
+    app:cardCornerRadius="12dp"
+    android:background="@drawable/bg_btn_action">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/ivGaleriHerbalList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/gambar_error_image"
+            android:scaleType="centerCrop"
+            android:elevation="1dp"/>
+        <View
+            android:id="@+id/bgTransparent"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:elevation="10dp"
+            android:background="@color/backgroundTransparent"/>
+
+        <TextView
+            android:id="@+id/tvJudulObatHerbal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/bgTransparent"
+            app:layout_constraintBottom_toBottomOf="@id/bgTransparent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="Tumbuhan Kunyit dan lain lain dan lain"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/textJudulTransparent"
+            android:gravity="center"
+            android:lineSpacingExtra="2dp"
+            android:elevation="20dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
