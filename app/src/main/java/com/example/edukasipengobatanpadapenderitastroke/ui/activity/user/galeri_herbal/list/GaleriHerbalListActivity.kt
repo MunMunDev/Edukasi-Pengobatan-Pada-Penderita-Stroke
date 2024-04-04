@@ -7,8 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.edukasipengobatanpadapenderitastroke.adapter.GaleriHerbalListAdapter
+import com.example.edukasipengobatanpadapenderitastroke.adapter.user.GaleriHerbalListAdapter
 import com.example.edukasipengobatanpadapenderitastroke.data.model.GaleriHerbalListModel
 import com.example.edukasipengobatanpadapenderitastroke.databinding.ActivityGaleriHerbalListBinding
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.galeri_herbal.detail.GaleriHerbalDetailActivity
@@ -112,9 +111,4 @@ class GaleriHerbalListActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        startActivity(Intent(this@GaleriHerbalListActivity, MainActivity::class.java))
-        finish()
-    }
 }

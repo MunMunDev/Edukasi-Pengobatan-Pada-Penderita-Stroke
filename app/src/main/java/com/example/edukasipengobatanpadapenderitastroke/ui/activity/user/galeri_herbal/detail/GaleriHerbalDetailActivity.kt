@@ -11,10 +11,12 @@ import com.example.edukasipengobatanpadapenderitastroke.R
 import com.example.edukasipengobatanpadapenderitastroke.data.model.GaleriHerbalListModel
 import com.example.edukasipengobatanpadapenderitastroke.databinding.ActivityGaleriHerbalDetailBinding
 import com.example.edukasipengobatanpadapenderitastroke.utils.Constant
+import com.example.edukasipengobatanpadapenderitastroke.utils.Youtube
 
 class GaleriHerbalDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGaleriHerbalDetailBinding
     private var listGaleriHerbalDetail : GaleriHerbalListModel? = null
+    private var youtube = Youtube()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGaleriHerbalDetailBinding.inflate(layoutInflater)
@@ -40,7 +42,7 @@ class GaleriHerbalDetailActivity : AppCompatActivity() {
                 finish()
             }
             btnVideoYoutube.setOnClickListener {
-                setToYoutubeVideo(listGaleriHerbalDetail!!.youtube!!)
+                youtube.setToYoutubeVideo(this@GaleriHerbalDetailActivity, listGaleriHerbalDetail!!.youtube!!)
             }
         }
     }
@@ -56,44 +58,9 @@ class GaleriHerbalDetailActivity : AppCompatActivity() {
                 .error(R.drawable.gambar_error_image)
                 .into(binding.ivGaleriHerbalDetail)
 
-            setImageFromYoutube(listGaleriHerbalDetail!!.youtube!!)
+            youtube.setImageFromYoutube(this@GaleriHerbalDetailActivity, listGaleriHerbalDetail!!.youtube!!, binding.ivYoutube)
         }
 
     }
 
-    private fun setToYoutubeVideo(urlVideo: String) {
-        val id = searchIdUrlVideo(urlVideo)
-        val appIntent = Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:$id"))
-        val webIntent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("http://www.youtube.com/watch?v=$id")
-        )
-        try {
-            startActivity(appIntent)
-        } catch (ex: ActivityNotFoundException) {
-            startActivity(webIntent)
-        }
-    }
-
-    private fun setImageFromYoutube(
-        urlVideo: String
-    ) {
-        val id = searchIdUrlVideo(urlVideo)
-        binding.apply {
-            Glide.with(this@GaleriHerbalDetailActivity)
-                .load("https://img.youtube.com/vi/$id/0.jpg") // URL Gambar
-                .error(R.drawable.gambar_error_image)
-                .into(binding.ivYoutube) // imageView mana yang akan diterapkan
-        }
-    }
-
-    fun searchIdUrlVideo(urlVideo: String): String {
-        return try {
-            val arrayUrlImageVideo = urlVideo.split("v=")
-            arrayUrlImageVideo[1]
-        } catch (ex: Exception){
-            val arrayUrlImageVideo = urlVideo.split("si=")
-            arrayUrlImageVideo[1]
-        }
-    }
 }

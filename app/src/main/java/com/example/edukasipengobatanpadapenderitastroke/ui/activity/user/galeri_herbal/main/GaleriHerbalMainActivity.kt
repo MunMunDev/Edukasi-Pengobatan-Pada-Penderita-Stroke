@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.edukasipengobatanpadapenderitastroke.adapter.GaleriHerbalMainAdapter
+import com.example.edukasipengobatanpadapenderitastroke.adapter.user.GaleriHerbalMainAdapter
 import com.example.edukasipengobatanpadapenderitastroke.data.model.GaleriHerbalMainModel
 import com.example.edukasipengobatanpadapenderitastroke.databinding.ActivityGaleriHerbalMainBinding
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.galeri_herbal.list.GaleriHerbalListActivity

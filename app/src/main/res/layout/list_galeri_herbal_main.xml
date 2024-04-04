@@ -20,7 +20,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:src="@drawable/gambar_obat_herbal_tumbuh_tumbuhan"/>
+                android:src="@drawable/gambar_obat_herbal_tumbuh_tumbuhan"
+                android:scaleType="fitXY"/>
             <TextView
                 android:id="@+id/tvJudulObatHerbal"
                 android:layout_width="0dp"

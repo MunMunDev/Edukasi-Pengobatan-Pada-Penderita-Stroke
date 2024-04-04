@@ -10,6 +10,7 @@ import com.example.edukasipengobatanpadapenderitastroke.utils.LoadingAlertDialog
 import com.example.edukasipengobatanpadapenderitastroke.utils.SharedPreferencesLogin
 import com.example.edukasipengobatanpadapenderitastroke.data.model.UsersModel
 import com.example.edukasipengobatanpadapenderitastroke.databinding.ActivityLoginBinding
+import com.example.edukasipengobatanpadapenderitastroke.ui.activity.admin.main.AdminMainActivity
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.registrasi.RegistrasiActivity
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.main.MainActivity
 import com.example.edukasipengobatanpadapenderitastroke.utils.network.UIState
@@ -124,8 +125,10 @@ class LoginActivity : AppCompatActivity() {
             sharedPreferencesLogin.setLogin(valueIdUser, valueNama, valueNomorHp, valueUsername, valuePassword, valueSebagai)
             if(valueSebagai=="user"){
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                finish()
             } else{
-//                startActivity(Intent(this@LoginActivity, AdminMainActivity::class.java))
+                startActivity(Intent(this@LoginActivity, AdminMainActivity::class.java))
+                finish()
             }
         } catch (ex: Exception){
             Toast.makeText(this@LoginActivity, "gagal: $ex", Toast.LENGTH_SHORT).show()

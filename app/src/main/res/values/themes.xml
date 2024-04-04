@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.EdukasiPengobatanPadaPenderitaStroke" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
+<!--        <item name="backgroundTint">@color/white</item>-->
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:textSize">12sp</item>

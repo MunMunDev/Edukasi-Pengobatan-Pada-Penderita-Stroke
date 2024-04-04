@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="18dp">
+    android:layout_marginTop="18dp"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/tvInisial"
@@ -14,9 +15,10 @@
         android:gravity="center"
         android:textSize="22sp"
         android:text="A"
+        android:textAllCaps="true"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:background="@drawable/bg_circle" />
+        android:background="@drawable/bg_circle_2" />
 
     <TextView
         android:id="@+id/tvNama"
@@ -32,6 +34,46 @@
         android:textColor="@color/black"
         android:textStyle="bold"/>
 
+<!--    <LinearLayout-->
+<!--        android:id="@+id/llBintang"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tvInisial"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:orientation="horizontal">-->
+<!--        <ImageView-->
+<!--            android:id="@+id/ivBintang1"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:src="@drawable/icon_star_non_aktif"/>-->
+<!--        <ImageView-->
+<!--            android:id="@+id/ivBintang2"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:src="@drawable/icon_star_non_aktif"-->
+<!--            android:layout_marginStart="3dp"/>-->
+<!--        <ImageView-->
+<!--            android:id="@+id/ivBintang3"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:src="@drawable/icon_star_non_aktif"-->
+<!--            android:layout_marginStart="3dp"/>-->
+<!--        <ImageView-->
+<!--            android:id="@+id/ivBintang4"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:src="@drawable/icon_star_non_aktif"-->
+<!--            android:layout_marginStart="3dp"/>-->
+<!--        <ImageView-->
+<!--            android:id="@+id/ivBintang5"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:src="@drawable/icon_star_non_aktif"-->
+<!--            android:layout_marginStart="3dp"/>-->
+<!--    </LinearLayout>-->
+
     <LinearLayout
         android:id="@+id/llBintang"
         android:layout_width="wrap_content"
@@ -43,31 +85,31 @@
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/ivBintang1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@drawable/icon_star_non_aktif"/>
         <ImageView
             android:id="@+id/ivBintang2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@drawable/icon_star_non_aktif"
             android:layout_marginStart="3dp"/>
         <ImageView
             android:id="@+id/ivBintang3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@drawable/icon_star_non_aktif"
             android:layout_marginStart="3dp"/>
         <ImageView
             android:id="@+id/ivBintang4"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@drawable/icon_star_non_aktif"
             android:layout_marginStart="3dp"/>
         <ImageView
             android:id="@+id/ivBintang5"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@drawable/icon_star_non_aktif"
             android:layout_marginStart="3dp"/>
     </LinearLayout>
@@ -76,14 +118,25 @@
         android:id="@+id/tvTanggal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/llBintang"
         app:layout_constraintTop_toTopOf="@id/llBintang"
         app:layout_constraintBottom_toBottomOf="@id/llBintang"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="12dp"
         android:text="12 Februari 2024"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:textColor="@color/abuabu_tua"
         android:textStyle="normal" />
+
+    <ImageView
+        android:id="@+id/ivBukti"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@id/llBintang"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/gambar_error_image"
+        android:scaleType="centerCrop"
+        android:elevation="24dp"/>
 
     <TextView
         android:id="@+id/tvTestimoni"
@@ -92,7 +145,7 @@
         app:layout_constraintTop_toBottomOf="@id/llBintang"
         android:layout_marginTop="14dp"
         android:text="Aplikasi ini sangat berguna untuk edukasi tentang stroke. Di aplikasi ini kita dapat melihat tentang stroke, gejala stroke, galeri herbal, terapi stroke, dan menu sehat. "
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:textColor="@color/black"
         android:textStyle="normal"/>
 

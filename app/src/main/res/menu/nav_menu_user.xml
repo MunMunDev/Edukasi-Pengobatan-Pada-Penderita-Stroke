@@ -29,19 +29,28 @@
             android:icon="@drawable/baseline_home_24"/>
         <item
             android:id="@+id/userNavDrawerTentangStroke"
-            android:title="Tentang Stroke"/>
+            android:title="Tentang Stroke"
+            android:icon="@drawable/icon_tentang_stroke"/>
         <item
             android:id="@+id/userNavDrawerGaleriHerbal"
-            android:title="Galeri Herbal"/>
+            android:title="Galeri Herbal"
+            android:icon="@drawable/galeri_herbal"/>
         <item
             android:id="@+id/userNavDrawerTerapi"
-            android:title="Terapi"/>
+            android:title="Terapi"
+            android:icon="@drawable/icon_terapi"/>
         <item
             android:id="@+id/userNavDrawerMenuSehat"
-            android:title="Menu Sehat"/>
+            android:title="Menu Sehat"
+            android:icon="@drawable/icon_menu_sehat"/>
+        <item
+            android:id="@+id/userNavDrawerTestimoni"
+            android:title="Testimoni"
+            android:icon="@drawable/icon_testimoni"/>
         <item
             android:id="@+id/userNavDrawerAkun"
-            android:title="Akun"/>
+            android:title="Akun"
+            android:icon="@drawable/baseline_account_circle_24"/>
     </group>
 
     <group android:id="@+id/userDrawerBottom">

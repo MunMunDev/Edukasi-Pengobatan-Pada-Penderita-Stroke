@@ -18,6 +18,9 @@ class TestimoniModel (
     @SerializedName("bintang")
     var bintang: String? = null,
 
+    @SerializedName("gambar")
+    var gambar: String? = null,
+
     @SerializedName("tanggal")
     var tanggal: String? = null
 )

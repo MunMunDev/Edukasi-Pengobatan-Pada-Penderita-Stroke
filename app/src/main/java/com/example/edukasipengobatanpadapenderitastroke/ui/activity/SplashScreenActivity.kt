@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.example.edukasipengobatanpadapenderitastroke.R
+import com.example.edukasipengobatanpadapenderitastroke.ui.activity.admin.main.AdminMainActivity
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.login.LoginActivity
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.main.MainActivity
 import com.example.edukasipengobatanpadapenderitastroke.utils.SharedPreferencesLogin
@@ -27,19 +28,18 @@ class SplashScreenActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             if(sharedPreferencesLogin.getIdUser() == 0){
-//                startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
-                finish()
                 startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
+                finish()
             }
             else{
                 if(sharedPreferencesLogin.getSebagai() == "user"){
                     startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
                     finish()
                 }
-//                else if(sharedPreferencesLogin.getSebagai() == "admin"){
-//                    startActivity(Intent(this@SplashScreenActivity, AdminMainActivity::class.java))
-//                    finish()
-//                }
+                else if(sharedPreferencesLogin.getSebagai() == "admin"){
+                    startActivity(Intent(this@SplashScreenActivity, AdminMainActivity::class.java))
+                    finish()
+                }
             }
         }, 3000)
     }

@@ -3,25 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
-    <group android:id="@+id/adminListDrawer">
+    <group android:id="@+id/userListDrawer">
         <item
             android:id="@+id/adminNavDrawerHome"
-            android:title="Halaman Home"/>
+            android:title="Halaman Home"
+            android:icon="@drawable/baseline_home_24"/>
         <item
-            android:id="@+id/adminNavDrawerJenisPlafon"
-            android:title="Jenis Plafon"/>
+            android:id="@+id/adminNavDrawerTentangStroke"
+            android:title="Tentang Stroke"
+            android:icon="@drawable/icon_tentang_stroke"/>
         <item
-            android:id="@+id/adminNavDrawerPlafon"
-            android:title="Plafon"/>
+            android:id="@+id/adminNavDrawerGaleriHerbal"
+            android:title="Galeri Herbal"
+            android:icon="@drawable/galeri_herbal"/>
         <item
-            android:id="@+id/adminNavDrawerPesanan"
-            android:title="Pesanan"/>
+            android:id="@+id/adminNavDrawerTerapi"
+            android:title="Terapi"
+            android:icon="@drawable/icon_terapi"/>
         <item
-            android:id="@+id/adminNavDrawerRiwayatPesanan"
-            android:title="Riwayat Pesanan"/>
+            android:id="@+id/adminNavDrawerMenuSehat"
+            android:title="Menu Sehat"
+            android:icon="@drawable/icon_menu_sehat"/>
+        <item
+            android:id="@+id/adminNavDrawerTestimoni"
+            android:title="Testimoni"
+            android:icon="@drawable/icon_testimoni"/>
         <item
             android:id="@+id/adminNavDrawerAkun"
-            android:title="Semua Akun"/>
+            android:title="Akun"
+            android:icon="@drawable/baseline_account_circle_24"/>
     </group>
 
     <group android:id="@+id/adminDrawerBottom">

@@ -4,26 +4,30 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.edukasipengobatanpadapenderitastroke.R
-import com.example.edukasipengobatanpadapenderitastroke.adapter.TestimoniAdapter
+import com.example.edukasipengobatanpadapenderitastroke.adapter.user.TestimoniAdapter
 import com.example.edukasipengobatanpadapenderitastroke.data.model.TestimoniModel
 import com.example.edukasipengobatanpadapenderitastroke.databinding.ActivityMainBinding
+import com.example.edukasipengobatanpadapenderitastroke.databinding.AlertDialogShowImageBinding
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.galeri_herbal.main.GaleriHerbalMainActivity
+import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.menu_sehat.MenuSehatActivity
+import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.tentang_stroke.list.TentangStrokeListActivity
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.terapi.list.TerapiListActivity
-import com.example.edukasipengobatanpadapenderitastroke.ui.fragment.user.galeri_herbal.GaleriHerbalFragment
+import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.testimoni.TestimoniActivity
+import com.example.edukasipengobatanpadapenderitastroke.utils.Constant
 import com.example.edukasipengobatanpadapenderitastroke.utils.KontrolNavigationDrawer
-import com.example.edukasipengobatanpadapenderitastroke.utils.KontrolNavigationDrawerFragment
+import com.example.edukasipengobatanpadapenderitastroke.utils.OnClickItem
 import com.example.edukasipengobatanpadapenderitastroke.utils.SharedPreferencesLogin
 import com.example.edukasipengobatanpadapenderitastroke.utils.network.UIState
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.ArrayList
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -83,7 +87,8 @@ class MainActivity : AppCompatActivity() {
     private fun setButton() {
         binding.apply {
             btnTentangStroke.setOnClickListener {
-
+                startActivity(Intent(this@MainActivity, TentangStrokeListActivity::class.java))
+                finish()
             }
             btnGaleriHerbal.setOnClickListener {
                 startActivity(Intent(this@MainActivity, GaleriHerbalMainActivity::class.java))
@@ -94,11 +99,13 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
             btnMenuSehat.setOnClickListener {
-
+                startActivity(Intent(this@MainActivity, MenuSehatActivity::class.java))
+                finish()
             }
 
             btnTestimoni.setOnClickListener {
-
+                startActivity(Intent(this@MainActivity, TestimoniActivity::class.java))
+                finish()
             }
         }
     }
@@ -123,11 +130,50 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setSuccessTestimoni(data: ArrayList<TestimoniModel>) {
-        setAdapter(data)
+        val testimoniSendiri: ArrayList<TestimoniModel> = arrayListOf()
+        val testimoniOrangLain: ArrayList<TestimoniModel> = arrayListOf()
+        val testimoniSemua: ArrayList<TestimoniModel> = arrayListOf()
+        for (value in data){
+            if(value.id_user!!.trim().toInt() == sharedPreferencesLogin.getIdUser()){
+                testimoniSendiri.add(value)
+            } else{
+                testimoniOrangLain.add(value)
+            }
+        }
+        testimoniSemua.addAll(testimoniSendiri)
+        testimoniSemua.addAll(testimoniOrangLain)
+        setAdapter(testimoniSemua)
+
+//        setAdapter(data)
     }
 
     private fun setAdapter(data: ArrayList<TestimoniModel>) {
-        adapter = TestimoniAdapter(data, sharedPreferencesLogin.getIdUser().toString(), true)
+        adapter = TestimoniAdapter(data, sharedPreferencesLogin.getIdUser().toString(), true, object : OnClickItem.ClickTestimoni{
+            override fun clickGambar(gambar: String, nama: String, it: View) {
+
+//                val view = AlertDialogShowImageBinding.inflate(layoutInflater)
+//
+//                val alertDialog = AlertDialog.Builder(this@MainActivity)
+//                alertDialog.setView(view.root)
+//                    .setCancelable(false)
+//                val dialogInputan = alertDialog.create()
+//                dialogInputan.show()
+//
+//                view.apply {
+//                    tvTitle.text = nama
+//                    btnClose.setOnClickListener {
+//                        dialogInputan.dismiss()
+//                    }
+//                }
+//
+//                Glide.with(this@MainActivity)
+//                    .load("${Constant.BASE_URL}${Constant.LOCATION_GAMBAR}$gambar") // URL Gambar
+//                    .error(R.drawable.gambar_error_image)
+//                    .into(view.ivShowImage) // imageView mana yang akan diterapkan
+
+            }
+
+        })
         binding.apply {
             rvTestimoni.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
             rvTestimoni.adapter = adapter
@@ -150,5 +196,18 @@ class MainActivity : AppCompatActivity() {
 
             rvTestimoni.visibility = View.GONE
         }
+    }
+
+    private var tapDuaKali = false
+    override fun onBackPressed() {
+        if (tapDuaKali){
+            super.onBackPressed()
+        }
+        tapDuaKali = true
+        Toast.makeText(this@MainActivity, "Tekan Sekali Lagi untuk keluar", Toast.LENGTH_SHORT).show()
+
+        Handler().postDelayed({
+            tapDuaKali = false
+        }, 2000)
     }
 }

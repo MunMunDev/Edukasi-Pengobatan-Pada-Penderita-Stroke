@@ -3,7 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="text_white">#F3F3F3</color>
     <color name="bg_white">#F5F5FA</color>
     <color name="abuabu_muda_sekali">#CCEEEEEE</color>
     <color name="abuabu_muda">#DDDDDD</color>
@@ -15,8 +14,9 @@
     <color name="batal">#747496</color>
     <color name="edit">#F0AD4E</color>
 
-<!--    <color name="primaryColor">#A949A0</color>-->
-    <color name="primaryColor">#0BA184</color>
+<!--    <color name="primaryColor">#06985F</color>-->
+    <color name="primaryColor">#068151</color>
+<!--    <color name="primaryColor">#0BA184</color>-->
     <color name="secondaryColor">#0BA184</color>
 <!--    1d816e-->
     <color name="backgroundTransparent">#B3000000</color>
@@ -34,4 +34,10 @@
 
     <color name="centerGradient">#BCD3E1</color>
     <color name="endGradient">#AEDAF4</color>
+
+
+    <!-- Style Gelap -->
+    <color name="text_white">#F3F3F3</color>
+    <color name="dark_backgroound">#0E0E0E</color>
+
 </resources>

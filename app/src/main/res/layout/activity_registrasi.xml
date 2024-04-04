@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.registrasi.RegistrasiActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:paddingBottom="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
             android:layout_height="230dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/top_background_register5"
+            android:src="@drawable/top_background_register"
             android:scaleType="centerCrop"/>
 
         <TextView

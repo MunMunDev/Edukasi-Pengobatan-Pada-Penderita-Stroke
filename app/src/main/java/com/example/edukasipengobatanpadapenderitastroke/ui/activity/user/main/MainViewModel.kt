@@ -24,8 +24,8 @@ class MainViewModel @Inject constructor(
             _testimoni.postValue(UIState.Loading)
             delay(1_000)
             try {
-                val dataMateri = api.getTestimoni("")
-                _testimoni.postValue(UIState.Success(dataMateri))
+                val data = api.getTestimoni("")
+                _testimoni.postValue(UIState.Success(data))
             } catch (ex: Exception) {
                 _testimoni.postValue(UIState.Failure("Error ${ex.message}"))
             }

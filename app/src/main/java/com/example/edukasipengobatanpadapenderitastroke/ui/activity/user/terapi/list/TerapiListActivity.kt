@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.edukasipengobatanpadapenderitastroke.adapter.TerapiAdapter
+import com.example.edukasipengobatanpadapenderitastroke.adapter.user.TerapiAdapter
 import com.example.edukasipengobatanpadapenderitastroke.data.model.TerapiModel
 import com.example.edukasipengobatanpadapenderitastroke.databinding.ActivityTerapiListBinding
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.main.MainActivity
