@@ -36,17 +36,39 @@ class Youtube() {
             .into(imageView) // imageView mana yang akan diterapkan
     }
 
+//    private fun searchIdUrlVideo(urlVideo: String): String {
+//        var url = ""
+//        url = try {
+//            val arrayUrlImageVideo = urlVideo.split("v=")
+//            arrayUrlImageVideo[1]
+//        } catch (ex: Exception){
+//            try {
+//                val arrayUrlImageVideo = urlVideo.split("si=")
+//                arrayUrlImageVideo[1]
+//            } catch (ex: Exception){
+//                "0"
+//            }
+//        }
+//        return url
+//    }
     private fun searchIdUrlVideo(urlVideo: String): String {
         var url = ""
-        url = try {
-            val arrayUrlImageVideo = urlVideo.split("v=")
-            arrayUrlImageVideo[1]
+        try {
+            val arrayUrlIdVideo = urlVideo.split("v=")
+            url = arrayUrlIdVideo[1]
+
+            try {
+                val arraySearchUrlSymbol = url.split("&")
+                url = arraySearchUrlSymbol[0]
+            } catch (_: Exception){
+                url = arrayUrlIdVideo[1]
+            }
         } catch (ex: Exception){
             try {
-                val arrayUrlImageVideo = urlVideo.split("si=")
-                arrayUrlImageVideo[1]
+                val arrayUrlIdVideo = urlVideo.split("si=")
+                url = arrayUrlIdVideo[1]
             } catch (ex: Exception){
-                "0"
+                url = "0"
             }
         }
         return url

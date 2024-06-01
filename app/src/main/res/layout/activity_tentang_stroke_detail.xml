@@ -60,7 +60,7 @@
             android:layout_marginEnd="20dp"
             tools:listitem="@layout/list_tentang_stroke_detail"
             tools:itemCount="5"
-            android:nestedScrollingEnabled="false"
+            android:nestedScrollingEnabled="true"
             android:visibility="gone"/>
 
         <com.facebook.shimmer.ShimmerFrameLayout

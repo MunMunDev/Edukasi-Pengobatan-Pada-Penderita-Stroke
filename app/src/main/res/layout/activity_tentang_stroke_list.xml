@@ -60,7 +60,7 @@
                 tools:listitem="@layout/list_tentang_stroke"
                 tools:itemCount="3"
                 android:visibility="gone"
-                android:nestedScrollingEnabled="false"/>
+                android:nestedScrollingEnabled="true"/>
 
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/smTentangStroke"

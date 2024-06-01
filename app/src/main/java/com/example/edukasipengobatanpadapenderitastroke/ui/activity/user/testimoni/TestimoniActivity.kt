@@ -173,6 +173,8 @@ class TestimoniActivity : AppCompatActivity() {
                     .load("${Constant.BASE_URL}${Constant.LOCATION_GAMBAR}${testimoniSendiri[0].gambar}") // URL Gambar
                     .error(R.drawable.gambar_error_image)
                     .into(ivBukti) // imageView mana yang akan diterapkan
+
+//                Toast.makeText(this@TestimoniActivity, "${testimoniSendiri[0].gambar}", Toast.LENGTH_SHORT).show()
             }
             ivBukti.setOnClickListener {
                 setShowImage(testimoniSendiri[0].gambar!!, testimoniSendiri[0].nama!!)

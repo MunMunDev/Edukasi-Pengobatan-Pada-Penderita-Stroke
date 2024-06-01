@@ -255,7 +255,7 @@
                     tools:listitem="@layout/list_testimoni"
                     tools:itemCount="3"
                     android:visibility="gone"
-                    android:nestedScrollingEnabled="false"/>
+                    android:nestedScrollingEnabled="true"/>
 
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/smTestimoni"

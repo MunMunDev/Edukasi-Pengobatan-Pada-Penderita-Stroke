@@ -68,7 +68,7 @@
                     tools:listitem="@layout/list_testimoni"
                     tools:itemCount="4"
                     android:visibility="visible"
-                    android:nestedScrollingEnabled="false"/>
+                    android:nestedScrollingEnabled="true"/>
             </LinearLayout>
 
             <com.facebook.shimmer.ShimmerFrameLayout

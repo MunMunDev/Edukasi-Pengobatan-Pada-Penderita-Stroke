@@ -60,7 +60,7 @@
                 tools:listitem="@layout/list_galeri_herbal_main"
                 tools:itemCount="4"
                 android:visibility="gone"
-                android:nestedScrollingEnabled="false"/>
+                android:nestedScrollingEnabled="true"/>
 
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/smGaleriHerbal"
