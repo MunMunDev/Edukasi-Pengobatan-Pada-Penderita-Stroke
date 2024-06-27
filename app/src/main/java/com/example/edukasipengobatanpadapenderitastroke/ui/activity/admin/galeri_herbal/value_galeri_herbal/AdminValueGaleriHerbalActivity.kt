@@ -37,6 +37,7 @@ import com.example.edukasipengobatanpadapenderitastroke.databinding.AlertDialogK
 import com.example.edukasipengobatanpadapenderitastroke.databinding.AlertDialogKonfirmasiBinding
 import com.example.edukasipengobatanpadapenderitastroke.databinding.AlertDialogShowImageBinding
 import com.example.edukasipengobatanpadapenderitastroke.databinding.AlertDialogValGaleriHerbalBinding
+import com.example.edukasipengobatanpadapenderitastroke.ui.activity.admin.galeri_herbal.halaman_galeri_herbal.AdminHalamanGaleriHerbalActivity
 import com.example.edukasipengobatanpadapenderitastroke.utils.Constant
 import com.example.edukasipengobatanpadapenderitastroke.utils.KataAcak
 import com.example.edukasipengobatanpadapenderitastroke.utils.LoadingAlertDialog
@@ -642,7 +643,8 @@ class AdminValueGaleriHerbalActivity : AppCompatActivity() {
     private fun requestPermission(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
             if (Environment.isExternalStorageManager()) {
-                startActivity(Intent(this, AdminHalamanGaleriHerbalAdapter::class.java))
+//                startActivity(Intent(this, AdminHalamanGaleriHerbalAdapter::class.java))
+                startActivity(Intent(this@AdminValueGaleriHerbalActivity, AdminHalamanGaleriHerbalActivity::class.java))
             } else { //request for the permission
                 val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
                 val uri = Uri.fromParts("package", packageName, null)
