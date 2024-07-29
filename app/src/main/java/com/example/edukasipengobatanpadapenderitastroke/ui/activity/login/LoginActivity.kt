@@ -32,19 +32,7 @@ class LoginActivity : AppCompatActivity() {
 
         konfigurationUtils()
         button()
-        setDataSebelumnya()
         getData()
-    }
-
-    private fun setDataSebelumnya() {
-        val extras = intent.extras
-        if(extras != null) {
-            val username = extras.getString("username")
-            val password = extras.getString("password")
-
-            loginBinding.etUsername.setText(username)
-            loginBinding.etPassword.setText(password)
-        }
     }
 
     private fun konfigurationUtils() {
@@ -52,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun button(){
-        btnDaftar()
         btnLogin()
     }
 
@@ -72,12 +59,6 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
-    }
-
-    private fun btnDaftar() {
-        loginBinding.tvDaftar.setOnClickListener{
-            startActivity(Intent(this@LoginActivity, RegistrasiActivity::class.java))
         }
     }
 
@@ -123,30 +104,20 @@ class LoginActivity : AppCompatActivity() {
         try{
             Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
             sharedPreferencesLogin.setLogin(valueIdUser, valueNama, valueNomorHp, valueUsername, valuePassword, valueSebagai)
-            if(valueSebagai=="user"){
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                finish()
-            } else{
+            if(valueSebagai=="admin"){
                 startActivity(Intent(this@LoginActivity, AdminMainActivity::class.java))
                 finish()
+            } else{
+                Toast.makeText(this@LoginActivity, "Tolong periksa username dan password", Toast.LENGTH_SHORT).show()
             }
         } catch (ex: Exception){
             Toast.makeText(this@LoginActivity, "gagal: $ex", Toast.LENGTH_SHORT).show()
         }
     }
 
-
-    var tapDuaKali = false
     override fun onBackPressed() {
-        if (tapDuaKali){
-            super.onBackPressed()
-        }
-        tapDuaKali = true
-        Toast.makeText(this@LoginActivity, "Tekan Sekali Lagi untuk keluar", Toast.LENGTH_SHORT).show()
-
-        Handler().postDelayed({
-            tapDuaKali = false
-        }, 2000)
-
+        super.onBackPressed()
+        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        finish()
     }
 }

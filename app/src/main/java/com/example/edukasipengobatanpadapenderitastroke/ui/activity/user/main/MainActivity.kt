@@ -16,6 +16,7 @@ import com.example.edukasipengobatanpadapenderitastroke.adapter.user.TestimoniAd
 import com.example.edukasipengobatanpadapenderitastroke.data.model.TestimoniModel
 import com.example.edukasipengobatanpadapenderitastroke.databinding.ActivityMainBinding
 import com.example.edukasipengobatanpadapenderitastroke.databinding.AlertDialogShowImageBinding
+import com.example.edukasipengobatanpadapenderitastroke.ui.activity.login.LoginActivity
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.galeri_herbal.main.GaleriHerbalMainActivity
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.menu_sehat.MenuSehatActivity
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.tentang_stroke.list.TentangStrokeListActivity
@@ -35,7 +36,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var kontrolNavigationDrawer: KontrolNavigationDrawer
     private val viewModel: MainViewModel by viewModels()
     private lateinit var adapter: TestimoniAdapter
-    private lateinit var sharedPreferencesLogin: SharedPreferencesLogin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
 //        fragmentHome()
 //        setNavigationDrawerFragment()
 
-        setSharedPreferencesLogin()
         setNavigationDrawer()
         setButton()
         fetchTestimoni()
@@ -70,11 +69,6 @@ class MainActivity : AppCompatActivity() {
 //        fragmentTransaction.commit()
 //    }
 
-    @SuppressLint("SetTextI18n")
-    private fun setSharedPreferencesLogin() {
-        sharedPreferencesLogin = SharedPreferencesLogin(this@MainActivity)
-        binding.tvNama.text = "Hy, ${sharedPreferencesLogin.getNama()}"
-    }
 
     private fun setNavigationDrawer() {
         kontrolNavigationDrawer = KontrolNavigationDrawer(this@MainActivity)
@@ -86,6 +80,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setButton() {
         binding.apply {
+            btnLogin.setOnClickListener {
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                finish()
+            }
+
             btnTentangStroke.setOnClickListener {
                 startActivity(Intent(this@MainActivity, TentangStrokeListActivity::class.java))
                 finish()
@@ -134,11 +133,7 @@ class MainActivity : AppCompatActivity() {
         val testimoniOrangLain: ArrayList<TestimoniModel> = arrayListOf()
         val testimoniSemua: ArrayList<TestimoniModel> = arrayListOf()
         for (value in data){
-            if(value.id_user!!.trim().toInt() == sharedPreferencesLogin.getIdUser()){
-                testimoniSendiri.add(value)
-            } else{
-                testimoniOrangLain.add(value)
-            }
+            testimoniOrangLain.add(value)
         }
         testimoniSemua.addAll(testimoniSendiri)
         testimoniSemua.addAll(testimoniOrangLain)
@@ -148,7 +143,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setAdapter(data: ArrayList<TestimoniModel>) {
-        adapter = TestimoniAdapter(data, sharedPreferencesLogin.getIdUser().toString(), true, object : OnClickItem.ClickTestimoni{
+        adapter = TestimoniAdapter(data, true, object : OnClickItem.ClickTestimoni{
             override fun clickGambar(gambar: String, nama: String, it: View) {
 
 //                val view = AlertDialogShowImageBinding.inflate(layoutInflater)
