@@ -47,15 +47,6 @@
             android:id="@+id/userNavDrawerTestimoni"
             android:title="Testimoni"
             android:icon="@drawable/icon_testimoni"/>
-        <item
-            android:id="@+id/userNavDrawerAkun"
-            android:title="Akun"
-            android:icon="@drawable/baseline_account_circle_24"/>
     </group>
 
-    <group android:id="@+id/userDrawerBottom">
-        <item android:id="@+id/userBtnKeluar"
-            android:title="Logout"
-            android:icon="@drawable/baseline_exit_to_app_24"/>
-    </group>
 </menu>

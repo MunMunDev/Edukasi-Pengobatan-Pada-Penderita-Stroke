@@ -28,18 +28,11 @@ class SplashScreenActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             if(sharedPreferencesLogin.getIdUser() == 0){
-                startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
+                startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
                 finish()
-            }
-            else{
-                if(sharedPreferencesLogin.getSebagai() == "user"){
-                    startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
-                    finish()
-                }
-                else if(sharedPreferencesLogin.getSebagai() == "admin"){
-                    startActivity(Intent(this@SplashScreenActivity, AdminMainActivity::class.java))
-                    finish()
-                }
+            } else if(sharedPreferencesLogin.getSebagai() == "admin"){
+                startActivity(Intent(this@SplashScreenActivity, AdminMainActivity::class.java))
+                finish()
             }
         }, 3000)
     }

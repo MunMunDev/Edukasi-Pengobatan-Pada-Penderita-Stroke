@@ -109,6 +109,8 @@ interface ApiService {
         @Part("post_tambah_testimoni") post_tambah_testimoni: RequestBody,
         @Part("kata_acak") kata_acak: RequestBody,
         @Part("id_user") id_user: RequestBody,
+        @Part("nama") nama: RequestBody,
+        @Part("email") email: RequestBody,
         @Part("testimoni") testimoni: RequestBody,
         @Part("bintang") bintang: RequestBody,
         @Part gambar: MultipartBody.Part

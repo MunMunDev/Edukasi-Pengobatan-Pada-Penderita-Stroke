@@ -1,5 +1,8 @@
 package com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.tentang_stroke.detail
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -18,6 +21,7 @@ class TentangStrokeDetailActivity : AppCompatActivity() {
     private val viewModel: TentangStrokeDetailViewModel by viewModels()
     private lateinit var adapter: TentangStrokeDetailAdapter
     private lateinit var idHalTentangStroke: String
+    private var listData : ArrayList<TentangStrokeDetailModel> = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTentangStrokeDetailBinding.inflate(layoutInflater)
@@ -39,8 +43,33 @@ class TentangStrokeDetailActivity : AppCompatActivity() {
     }
 
     private fun setButton() {
-        binding.btnBack.setOnClickListener {
-            finish()
+        binding.apply {
+            btnBack.setOnClickListener {
+                finish()
+            }
+            btnCopy.setOnClickListener{
+                if(listData.isNotEmpty()){
+                    var data = ""
+                    for(value in listData){
+                        data += "${value.judul} \n"
+                        data += "${value.deskripsi} \n"
+                        data += "\n"
+                    }
+                    copyData(data)
+                }
+            }
+        }
+    }
+
+    private fun copyData(data: String) {
+        try{
+            val clipBoard: ClipboardManager =
+                getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData: ClipData = ClipData.newPlainText("Copied Text", data)
+            clipBoard.setPrimaryClip(clipData)
+            Toast.makeText(this@TentangStrokeDetailActivity, "Berhasil Copy", Toast.LENGTH_SHORT).show()
+        } catch (ex: Exception){
+            Toast.makeText(this@TentangStrokeDetailActivity, "Gagal copy : ${ex.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -66,6 +95,7 @@ class TentangStrokeDetailActivity : AppCompatActivity() {
     private fun setSuccessTentangStroke(data: ArrayList<TentangStrokeDetailModel>) {
         setStopShimmer()
         if(data.isNotEmpty()){
+            listData.addAll(data)
             setAdapter(data)
         } else{
             Toast.makeText(this@TentangStrokeDetailActivity, "Data Kosong", Toast.LENGTH_SHORT).show()

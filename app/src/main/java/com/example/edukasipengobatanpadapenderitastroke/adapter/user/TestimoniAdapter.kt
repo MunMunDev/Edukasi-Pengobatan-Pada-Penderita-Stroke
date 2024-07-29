@@ -11,10 +11,10 @@ import com.example.edukasipengobatanpadapenderitastroke.databinding.ListTestimon
 import com.example.edukasipengobatanpadapenderitastroke.utils.Constant
 import com.example.edukasipengobatanpadapenderitastroke.utils.OnClickItem
 import com.example.edukasipengobatanpadapenderitastroke.utils.TanggalDanWaktu
+import java.lang.Exception
 
 class TestimoniAdapter(
     private val listTestimoni: ArrayList<TestimoniModel>,
-    private val idUser: String,
     private var checkTestimoni: Boolean,       // Kalau true maka testimoni halaman home
     private val onClick: OnClickItem.ClickTestimoni
 ): RecyclerView.Adapter<TestimoniAdapter.ViewHolder>() {
@@ -42,22 +42,21 @@ class TestimoniAdapter(
 
         return size
 
-//        return if(checkTestimoni){
-//            3
-//        } else{
-//            listTestimoni.size
-//        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val testimoni = listTestimoni[position]
         holder.binding.apply {
-            val valueIdUser = testimoni.id_user!!
             val nama = testimoni.nama!!
             val tanggal = tanggalDanWaktu.konversiBulan(testimoni.tanggal!!)
             val valueTestimoni = testimoni.testimoni!!
             val bintang = testimoni.bintang!!.trim().toInt()
-            val firstLetter = nama.substring(0, 1)
+
+            val firstLetter = try {
+                nama.substring(0, 1)
+            } catch (ex: Exception){
+                "A"
+            }
 
             tvNama.text = nama
             tvTanggal.text = tanggal
@@ -65,6 +64,7 @@ class TestimoniAdapter(
             tvInisial.text = firstLetter
 
             val listBgCircle = ArrayList<Int>()
+            listBgCircle.add(R.drawable.bg_circle)
             listBgCircle.add(R.drawable.bg_circle_1)
             listBgCircle.add(R.drawable.bg_circle_2)
             listBgCircle.add(R.drawable.bg_circle_3)
@@ -99,14 +99,8 @@ class TestimoniAdapter(
                 }
             }
 
-            if(idUser == valueIdUser){
-                tvInisial.setBackgroundResource(R.drawable.bg_circle)
-                tvNama.text = "Anda"
-                tvInisial.text = "A"
-            } else{
-                val mathRandom = (Math.random()*5).toInt()
-                tvInisial.setBackgroundResource(listBgCircle[mathRandom])
-            }
+            val mathRandom = (Math.random()*5).toInt()
+            tvInisial.setBackgroundResource(listBgCircle[mathRandom])
 
             if(testimoni.gambar!!.trim().isEmpty()){
                 ivBukti.visibility = View.GONE
