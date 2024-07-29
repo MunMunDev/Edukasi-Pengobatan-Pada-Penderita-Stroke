@@ -53,14 +53,14 @@ class TestimoniViewModel @Inject constructor(
     }
 
     fun postTambahData(
-        post: RequestBody, kataAcak: RequestBody, id_user: RequestBody, testimoni: RequestBody,
+        post: RequestBody, kataAcak: RequestBody, idUser: RequestBody, nama: RequestBody, email: RequestBody, testimoni: RequestBody,
         bintang: RequestBody, gambar: MultipartBody.Part
     ){
         viewModelScope.launch(Dispatchers.IO) {
             _postTambahTestimoni.postValue(UIState.Loading)
             delay(1_000)
             try {
-                val postTambahTestimoni = api.addTestimoni(post, kataAcak, id_user, testimoni, bintang, gambar)
+                val postTambahTestimoni = api.addTestimoni(post, kataAcak,idUser, nama, email, testimoni, bintang, gambar)
                 _postTambahTestimoni.postValue(UIState.Success(postTambahTestimoni))
             } catch (ex: Exception){
                 _postTambahTestimoni.postValue(UIState.Failure("Error: ${ex.message}"))

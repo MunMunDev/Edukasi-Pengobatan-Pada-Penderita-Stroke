@@ -52,7 +52,6 @@ class TestimoniActivity : AppCompatActivity() {
     private lateinit var kontrolNavigationDrawer: KontrolNavigationDrawer
     private val viewModel: TestimoniViewModel by viewModels()
     private lateinit var adapter: TestimoniAdapter
-    private lateinit var sharedPreferencesLogin: SharedPreferencesLogin
     private var testimoniSendiri: ArrayList<TestimoniModel> = arrayListOf()
     private var testimoniOrangLain: ArrayList<TestimoniModel> = arrayListOf()
     @Inject lateinit var tanggalDanWaktu: TanggalDanWaktu
@@ -66,14 +65,12 @@ class TestimoniActivity : AppCompatActivity() {
         binding = ActivityTestimoniBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSharedPreferencesLogin()
         setNavigationDrawer()
         fetchTestimoni()
         getTestimoni()
         setButton()
         getTambahTestimoni()
-        getUpdateTestimoni()
-        getHapusTestimoni()
+//        getHapusTestimoni()
     }
 
     private fun setButton() {
@@ -82,11 +79,6 @@ class TestimoniActivity : AppCompatActivity() {
                 openAddTestimoni()
             }
         }
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun setSharedPreferencesLogin() {
-        sharedPreferencesLogin = SharedPreferencesLogin(this@TestimoniActivity)
     }
 
     private fun setNavigationDrawer() {
@@ -120,145 +112,19 @@ class TestimoniActivity : AppCompatActivity() {
         testimoniSendiri = arrayListOf()
         testimoniOrangLain = arrayListOf()
         for (value in data){
-            if(value.id_user!!.trim().toInt() == sharedPreferencesLogin.getIdUser()){
-                testimoniSendiri.add(value)
-            } else{
-                testimoniOrangLain.add(value)
-            }
+            testimoniOrangLain.add(value)
         }
-
-        if(testimoniSendiri.size>0){
-            setHaveDataTestimoni(testimoniSendiri)
-        } else{
-            setNoHaveDataTestimoni()
-        }
+        setNoHaveDataTestimoni()
 
 //        setAdapter(data)
         setAdapter(testimoniOrangLain)
-    }
-
-    private fun setHaveDataTestimoni(testimoniSendiri: ArrayList<TestimoniModel>) {
-        binding.apply {
-            llTestimoniSendiri.visibility = View.VISIBLE
-            btnTambahTestimoni.visibility = View.GONE
-            llPostTestimoniSendiri.visibility = View.GONE
-
-            tvTanggal.text = tanggalDanWaktu.konversiBulan(testimoniSendiri[0].tanggal!!)
-            tvTestimoni.text = testimoniSendiri[0].testimoni!!
-
-            when (testimoniSendiri[0].bintang!!.trim().toInt()) {
-                1 -> {
-                    setBintang1(ivBintang1, ivBintang2, ivBintang3, ivBintang4, ivBintang5)
-                }
-                2 -> {
-                    setBintang2(ivBintang1, ivBintang2, ivBintang3, ivBintang4, ivBintang5)
-                }
-                3 -> {
-                    setBintang3(ivBintang1, ivBintang2, ivBintang3, ivBintang4, ivBintang5)
-                }
-                4 -> {
-                    setBintang4(ivBintang1, ivBintang2, ivBintang3, ivBintang4, ivBintang5)
-                }
-                5 -> {
-                    setBintang5(ivBintang1, ivBintang2, ivBintang3, ivBintang4, ivBintang5)
-                }
-            }
-
-            if(testimoniSendiri[0].gambar!!.trim().isEmpty()){
-                ivBukti.visibility = View.GONE
-            } else{
-                ivBukti.visibility = View.VISIBLE
-
-                Glide.with(this@TestimoniActivity)
-                    .load("${Constant.BASE_URL}${Constant.LOCATION_GAMBAR}${testimoniSendiri[0].gambar}") // URL Gambar
-                    .error(R.drawable.gambar_error_image)
-                    .into(ivBukti) // imageView mana yang akan diterapkan
-
-//                Toast.makeText(this@TestimoniActivity, "${testimoniSendiri[0].gambar}", Toast.LENGTH_SHORT).show()
-            }
-            ivBukti.setOnClickListener {
-                setShowImage(testimoniSendiri[0].gambar!!, testimoniSendiri[0].nama!!)
-            }
-            btnEdit.setOnClickListener {
-                openEditTestimoni(testimoniSendiri)
-            }
-            btnHapus.setOnClickListener {
-                setDialogHapusTestimoni(testimoniSendiri[0])
-            }
-        }
-
-    }
-
-    private fun setDialogHapusTestimoni(testimoni: TestimoniModel) {
-        val view = AlertDialogKonfirmasiBinding.inflate(layoutInflater)
-
-        val alertDialog = AlertDialog.Builder(this@TestimoniActivity)
-        alertDialog.setView(view.root)
-            .setCancelable(false)
-        val dialogInputan = alertDialog.create()
-        dialogInputan.show()
-
-        tempAlertDialog = dialogInputan
-
-        view.apply {
-            tvTitleKonfirmasi.text = "Yakin Hapus Testimoni ini?"
-            tvBodyKonfirmasi.text = "Testimoni akan dihapus dan tidak dapat di kembalikan"
-
-            btnKonfirmasi.setOnClickListener {
-                postHapusTestimoni(testimoni.id_testimoni!!)
-            }
-            btnBatal.setOnClickListener {
-                dialogInputan.dismiss()
-                tempAlertDialog = null
-            }
-        }
-    }
-
-    private fun postHapusTestimoni(idTestimoni: String) {
-        viewModel.postHapusTestimoni(idTestimoni)
-    }
-
-    private fun getHapusTestimoni(){
-        viewModel.getResponseHapusTestimoni().observe(this@TestimoniActivity){result->
-            when(result){
-                is UIState.Loading-> loading.alertDialogLoading(this@TestimoniActivity)
-                is UIState.Failure-> setFailureHapusTestimoni(result.message)
-                is UIState.Success-> setSuccessHapusTestimoni(result.data)
-            }
-        }
-    }
-
-    private fun setFailureHapusTestimoni(message: String) {
-        loading.alertDialogCancel()
-        Toast.makeText(this@TestimoniActivity, message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun setSuccessHapusTestimoni(data: ArrayList<ResponseModel>) {
-        loading.alertDialogCancel()
-        if(data.isNotEmpty()){
-            if(data[0].status=="0"){
-                Toast.makeText(this@TestimoniActivity, "Berhasil Hapus", Toast.LENGTH_SHORT).show()
-                tempAlertDialog!!.dismiss()
-                tempAlertDialog = null
-                binding.apply {
-                    etTestimoni.setText("")
-                    setBintang0(ivBintang1, ivBintang2, ivBintang3, ivBintang4, ivBintang5)
-                }
-
-                fetchTestimoni()
-            } else{
-                Toast.makeText(this@TestimoniActivity, data[0].message_response, Toast.LENGTH_SHORT).show()
-            }
-        } else{
-            Toast.makeText(this@TestimoniActivity, "Ada error di web", Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun setNoHaveDataTestimoni(){
         binding.apply {
             btnTambahTestimoni.visibility = View.VISIBLE
             llPostTestimoniSendiri.visibility = View.GONE
-            llTestimoniSendiri.visibility = View.GONE
+//            llTestimoniSendiri.visibility = View.GONE
         }
     }
 
@@ -266,7 +132,6 @@ class TestimoniActivity : AppCompatActivity() {
         binding.apply {
             btnTambahTestimoni.visibility = View.GONE
             llPostTestimoniSendiri.visibility = View.GONE
-            llTestimoniSendiri.visibility = View.GONE
         }
     }
 
@@ -274,7 +139,6 @@ class TestimoniActivity : AppCompatActivity() {
         binding.apply {
             llPostTestimoniSendiri.visibility = View.VISIBLE
             btnTambahTestimoni.visibility = View.GONE
-            llTestimoniSendiri.visibility = View.GONE
 
             var jumlahBintang = 0
             ivPostBintang1.setOnClickListener {
@@ -311,6 +175,16 @@ class TestimoniActivity : AppCompatActivity() {
                     Toast.makeText(this@TestimoniActivity, "Masukkan Jumlah Bintang", Toast.LENGTH_SHORT).show()
                 } else{
                     var check = true
+                    if(etNama.text.isEmpty()){
+                        etNama.error = "Masukkan Nama"
+                        check = false
+                    }
+
+                    if(etEmail.text.isEmpty()){
+                        etEmail.error = "Masukkan Email"
+                        check = false
+                    }
+
                     if(etTestimoni.text.isEmpty()){
                         etTestimoni.error = "Masukkan Testimoni"
                         check = false
@@ -322,14 +196,13 @@ class TestimoniActivity : AppCompatActivity() {
                     }
 
                     if(check){
-                        val idUser = sharedPreferencesLogin.getIdUser().toString()
+                        val nama = etNama.text.toString()
+                        val email = etEmail.text.toString()
                         val testimoni = etTestimoni.text.toString()
                         val kata = kataAcak.getHurufDanAngka()
-                        Toast.makeText(this@TestimoniActivity, "$idUser dan kata $kata", Toast.LENGTH_SHORT).show()
 
-//                        postTambahTestimoni(idUser, testimoni, jumlahBintang.toString())
                         postTambahTestimoni(
-                            kata, idUser, testimoni, jumlahBintang.toString(), fileImage!!
+                            kata, nama, email,testimoni, jumlahBintang.toString(), fileImage!!
                         )
                     }
 
@@ -338,23 +211,20 @@ class TestimoniActivity : AppCompatActivity() {
             btnBatalTambah.setOnClickListener {
                 btnTambahTestimoni.visibility = View.VISIBLE
                 llPostTestimoniSendiri.visibility = View.GONE
-                llTestimoniSendiri.visibility = View.GONE
 
-//                etTestimoni.setText("")
-//                tvTextImageBukti.text = ""
-//                fileImage = null
-//                setBintang0(ivBintang1, ivBintang2, ivBintang3, ivBintang4, ivBintang5)
             }
         }
     }
 
-    private fun postTambahTestimoni(kata:String, id_user:String, testimoni:String, bintang:String, file: MultipartBody.Part) {
-//        viewModel.postTambahData(id_user, testimoni, bintang)
+    private fun postTambahTestimoni(kata:String, nama:String, email:String, testimoni:String, bintang:String, file: MultipartBody.Part) {
+//        viewModel.postTambahData(nama, testimoni, bintang)
 
         viewModel.postTambahData(
             convertStringToMultipartBody("post_tambah_testimoni"),
             convertStringToMultipartBody(kata),
-            convertStringToMultipartBody(id_user),
+            convertStringToMultipartBody("1"),
+            convertStringToMultipartBody(nama),
+            convertStringToMultipartBody(email),
             convertStringToMultipartBody(testimoni),
             convertStringToMultipartBody(bintang),
             file
@@ -393,7 +263,6 @@ class TestimoniActivity : AppCompatActivity() {
         binding.apply {
             llPostTestimoniSendiri.visibility = View.VISIBLE
             btnTambahTestimoni.visibility = View.GONE
-            llTestimoniSendiri.visibility = View.GONE
 
             etTestimoni.setText(testimoniSendiri[0].testimoni)
             when (testimoniSendiri[0].bintang!!.trim().toInt()) {
@@ -449,20 +318,19 @@ class TestimoniActivity : AppCompatActivity() {
                     Toast.makeText(this@TestimoniActivity, "Masukkan Jumlah Bintang", Toast.LENGTH_SHORT).show()
                 } else{
                     val idTestimoni = testimoniSendiri[0].id_testimoni!!
-                    val idUser = sharedPreferencesLogin.getIdUser().toString()
+//                    val idUser = sharedPreferencesLogin.getIdUser().toString()
                     val testimoni = etTestimoni.text.toString()
                     val kata = kataAcak.getHurufDanAngka()
 
                     if(fileImage == null){
-                        postEditTestimoniNoHaveImage(idTestimoni, idUser, testimoni, jumlahBintang.toString())
+//                        postEditTestimoniNoHaveImage(idTestimoni, idUser, testimoni, jumlahBintang.toString())
                     } else{
-                        postEditTestimoni(kata, idTestimoni, idUser, testimoni, jumlahBintang.toString(), fileImage!!)
+//                        postEditTestimoni(kata, idTestimoni, idUser, testimoni, jumlahBintang.toString(), fileImage!!)
                     }
                 }
             }
 
             btnBatalTambah.setOnClickListener {
-                llTestimoniSendiri.visibility = View.VISIBLE
                 llPostTestimoniSendiri.visibility = View.GONE
                 btnTambahTestimoni.visibility = View.GONE
 
@@ -476,53 +344,6 @@ class TestimoniActivity : AppCompatActivity() {
 //            id_testimoni, id_user, testimoni, bintang
 //        )
 //    }
-
-    private fun postEditTestimoni(kata:String, id_testimoni:String, id_user:String, testimoni:String, bintang:String, file: MultipartBody.Part) {
-        viewModel.postUpdatehData(
-            convertStringToMultipartBody(""),
-            convertStringToMultipartBody(kata),
-            convertStringToMultipartBody(id_testimoni),
-            convertStringToMultipartBody(id_user),
-            convertStringToMultipartBody(testimoni),
-            convertStringToMultipartBody(bintang),
-            file
-        )
-    }
-
-    private fun postEditTestimoniNoHaveImage(id_testimoni:String, id_user:String, testimoni:String, bintang:String) {
-        viewModel.postUpdatehDataNoHaveData(
-            id_testimoni, id_user, testimoni, bintang
-        )
-    }
-
-    private fun getUpdateTestimoni(){
-        viewModel.getResponseUpdateTestimoni().observe(this@TestimoniActivity){result->
-            when(result){
-                is UIState.Loading-> loading.alertDialogLoading(this@TestimoniActivity)
-                is UIState.Failure-> setFailureUpdateTestimoni(result.message)
-                is UIState.Success-> setSuccessUpdateTestimoni(result.data)
-            }
-        }
-    }
-
-    private fun setFailureUpdateTestimoni(message: String) {
-        loading.alertDialogCancel()
-        Toast.makeText(this@TestimoniActivity, message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun setSuccessUpdateTestimoni(data: java.util.ArrayList<ResponseModel>) {
-        loading.alertDialogCancel()
-        if(data.isNotEmpty()){
-            if(data[0].status == "0"){
-                Toast.makeText(this@TestimoniActivity, "Berhasil Update", Toast.LENGTH_SHORT).show()
-                binding.tvTextImageBukti.text = ""
-                setHiddenDataTestimoni()
-                fetchTestimoni()
-            } else{
-                Toast.makeText(this@TestimoniActivity, data[0].message_response, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
     private fun setBintang0(
         iv1: ImageView,
@@ -604,7 +425,7 @@ class TestimoniActivity : AppCompatActivity() {
     }
 
     private fun setAdapter(data: ArrayList<TestimoniModel>) {
-        adapter = TestimoniAdapter(data, sharedPreferencesLogin.getIdUser().toString(), false, object: OnClickItem.ClickTestimoni{
+        adapter = TestimoniAdapter(data,false, object: OnClickItem.ClickTestimoni{
             override fun clickGambar(gambar: String, nama: String, it: View) {
                 setShowImage(gambar, nama)
             }

@@ -12,6 +12,9 @@ class TestimoniModel (
     @SerializedName("nama")
     var nama: String? = null,
 
+    @SerializedName("email")
+    var email: String? = null,
+
     @SerializedName("testimoni")
     var testimoni: String? = null,
 
