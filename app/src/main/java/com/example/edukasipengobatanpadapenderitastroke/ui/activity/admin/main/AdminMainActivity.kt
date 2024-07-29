@@ -64,11 +64,11 @@ class AdminMainActivity : AppCompatActivity() {
                 startActivity(i)
                 finish()
             }
-            btnAkun.setOnClickListener {
-                val i = Intent(this@AdminMainActivity, AdminAkunActivity::class.java)
-                startActivity(i)
-                finish()
-            }
+//            btnAkun.setOnClickListener {
+//                val i = Intent(this@AdminMainActivity, AdminAkunActivity::class.java)
+//                startActivity(i)
+//                finish()
+//            }
         }
     }
 
