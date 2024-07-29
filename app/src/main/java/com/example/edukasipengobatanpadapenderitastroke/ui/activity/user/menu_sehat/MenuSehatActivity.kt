@@ -1,5 +1,8 @@
 package com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.menu_sehat
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.edukasipengobatanpadapenderitastroke.adapter.user.MenuSehatAdapter
 import com.example.edukasipengobatanpadapenderitastroke.data.model.MenuSehatModel
+import com.example.edukasipengobatanpadapenderitastroke.data.model.TentangStrokeDetailModel
 import com.example.edukasipengobatanpadapenderitastroke.databinding.ActivityMenuSehatBinding
 import com.example.edukasipengobatanpadapenderitastroke.ui.activity.user.main.MainActivity
 import com.example.edukasipengobatanpadapenderitastroke.utils.KontrolNavigationDrawer
@@ -21,15 +25,46 @@ class MenuSehatActivity : AppCompatActivity() {
     private lateinit var kontrolNavigationDrawer: KontrolNavigationDrawer
     private val viewModel: MenuSehatViewModel by viewModels()
     private lateinit var adapter: MenuSehatAdapter
+    private var listData : ArrayList<MenuSehatModel> = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuSehatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setKontrolNavigationDrawer()
+        setButton()
         fetchTentangStroke()
         getTentangStroke()
     }
+
+    private fun setButton() {
+        binding.apply {
+            btnCopy.setOnClickListener {
+                if(listData.isNotEmpty()){
+                    var data = ""
+                    for(value in listData){
+                        data += "${value.judul} \n"
+                        data += "${value.deskripsi} \n"
+                        data += "\n"
+                    }
+                    copyData(data)
+                }
+            }
+        }
+    }
+
+    private fun copyData(data: String) {
+        try{
+            val clipBoard: ClipboardManager =
+                getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData: ClipData = ClipData.newPlainText("Copied Text", data)
+            clipBoard.setPrimaryClip(clipData)
+            Toast.makeText(this@MenuSehatActivity, "Berhasil Copy", Toast.LENGTH_SHORT).show()
+        } catch (ex: Exception){
+            Toast.makeText(this@MenuSehatActivity, "Gagal copy : ${ex.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun setKontrolNavigationDrawer() {
         kontrolNavigationDrawer = KontrolNavigationDrawer(this@MenuSehatActivity)
         binding.apply {
@@ -60,6 +95,7 @@ class MenuSehatActivity : AppCompatActivity() {
     private fun setSuccessTentangStroke(data: ArrayList<MenuSehatModel>) {
         setStopShimmer()
         if(data.isNotEmpty()){
+            listData.addAll(data)
             setAdapter(data)
         } else{
             Toast.makeText(this@MenuSehatActivity, "Data Kosong", Toast.LENGTH_SHORT).show()
