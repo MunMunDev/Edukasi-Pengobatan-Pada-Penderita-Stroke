@@ -1,7 +1,7 @@
 package com.example.edukasipengobatanpadapenderitastroke.utils
 
 object Constant {
-    const val BASE_URL = "https://aplikasi-skripsi-for-umpar.000webhostapp.com/"
+    const val BASE_URL = "https://aplikasi-tugas-kampus.my.id/"
 //        const val BASE_URL = "http://192.168.17.6/"
     //    const val BASE_URL = "http://192.168.17.8/"
 //    const val BASE_URL = "http://192.168.1.16/"
