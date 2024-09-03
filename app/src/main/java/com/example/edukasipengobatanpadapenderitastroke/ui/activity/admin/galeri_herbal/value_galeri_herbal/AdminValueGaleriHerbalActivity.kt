@@ -393,6 +393,7 @@ class AdminValueGaleriHerbalActivity : AppCompatActivity() {
 
     }
 
+    // Ketika Tombol telah diedit
     private fun setShowDialogEdit(tentangStroke: GaleriHerbalListModel) {
         val view = AlertDialogValGaleriHerbalBinding.inflate(layoutInflater)
 
@@ -404,6 +405,7 @@ class AdminValueGaleriHerbalActivity : AppCompatActivity() {
 
         view.tVTitle.text = "Edit Value Galeri Herbal"
 
+        tempView = view
         tempAlertDialog = dialogInputan
 
         view.apply {
